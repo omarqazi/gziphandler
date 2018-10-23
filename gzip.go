@@ -34,7 +34,7 @@ const (
 	// 1500 bytes is the MTU size for the internet since that is the largest size allowed at the network layer.
 	// If you take a file that is 1300 bytes and compress it to 800 bytes, it’s still transmitted in that same 1500 byte packet regardless, so you’ve gained nothing.
 	// That being the case, you should restrict the gzip compression to files with a size greater than a single packet, 1400 bytes (1.4KB) is a safe value.
-	DefaultMinSize = 1400
+	DefaultMinSize = 140
 )
 
 // gzipWriterPools stores a sync.Pool for each compression level for reuse of
