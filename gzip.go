@@ -8,6 +8,7 @@ import (
 	"mime"
 	"net"
 	"net/http"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"sync"
@@ -448,6 +449,10 @@ func GzipHandler(h http.Handler) http.Handler {
 // acceptsGzip returns true if the given HTTP request indicates that it will
 // accept a gzipped response.
 func acceptsGzip(r *http.Request) bool {
+	if strings.Contains(r.URL.Path, "/master/") && filepath.Ext(r.URL.Path) == ".m3u8" {
+		return true
+	}
+
 	acceptedEncodings, _ := parseEncodings(r.Header.Get(acceptEncoding))
 	return acceptedEncodings["gzip"] > 0.0
 }
